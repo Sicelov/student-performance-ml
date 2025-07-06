@@ -4,10 +4,25 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Load model and features list
 model = joblib.load("student_performance_model.pkl")
 model_features = joblib.load("model_features.pkl")
+
+# Display Feature Importance (model coefficients)
+coefficients = pd.DataFrame(
+    model.coef_, model_features, columns=["Coefficient"])
+coefficients = coefficients.sort_values(by="Coefficient", ascending=False)
+
+st.subheader("📊 Feature Importance (Model Coefficients)")
+
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.barh(coefficients.index, coefficients["Coefficient"], color="skyblue")
+ax.set_xlabel("Coefficient Value (Impact on Predicted Score)")
+ax.set_ylabel("Feature")
+ax.set_title("Feature Importance in Student Score Prediction")
+st.pyplot(fig)
 
 st.title("🎓 Student Performance Predictor")
 
