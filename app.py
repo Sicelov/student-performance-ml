@@ -18,7 +18,7 @@ coefficients = coefficients.sort_values(by="Coefficient", ascending=False)
 st.subheader("📊 Feature Importance (Model Coefficients)")
 
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.barh(coefficients.index, coefficients["Coefficient"], color="blue")
+ax.barh(coefficients.index, coefficients["Coefficient"], color="Darkblue")
 ax.set_xlabel("Coefficient Value (Impact on Predicted Score)")
 ax.set_ylabel("Feature")
 ax.set_title("Feature Importance in Student Score Prediction")
